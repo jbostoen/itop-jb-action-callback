@@ -28,7 +28,7 @@
 			<fields>
 				<field id="callback" xsi:type="AttributeString">
 					<sql>callback</sql>
-					<default_value><![CDATA[\JeffreyBostoenExtensions\ActionCallback\Core\Notification\Action\_ActionCallback::DemoMethod($oObject, $aContextArgs, $oLog, $oAction)]]></default_value>
+					<default_value><![CDATA[\JeffreyBostoenExtensions\ActionCallback\Core\Notification\Action\_ActionCallback::DemoMethod]]></default_value>
 					<is_null_allowed>false</is_null_allowed>
 				</field>
 			</fields>
