@@ -18,7 +18,7 @@
 					</attributes>
 				</naming>
 				<display_template/>
-				<icon>asset/img/callback.svg</icon>
+				<icon>asset/img/icons8-in-transit.svg</icon>
 				<reconciliation>
 					<attributes>
 						<attribute id="name"/>

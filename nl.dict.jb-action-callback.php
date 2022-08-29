@@ -13,7 +13,7 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'Class:EventCallback' => 'Callback-gebeurtenis',
 	'Class:EventCallback+' => 'Callback-gebeurtenis',
 	
-	// EventCallback
+	// ActionCallback
 	'Class:ActionCallback' => 'Callback',
 	'Class:ActionCallback+' => 'Callback',
 	'Class:ActionCallback/Attribute:callback' => 'Callback',
