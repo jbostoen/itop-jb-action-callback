@@ -61,9 +61,6 @@
 						<item id="status">
 							<rank>30</rank>
 						</item>
-						<item id="language">
-							<rank>40</rank>
-						</item>
 						<item id="callback">
 							<rank>50</rank>
 						</item>
