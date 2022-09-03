@@ -30,10 +30,10 @@ abstract class _ActionCallback extends ActionNotification {
 		if (MetaModel::IsLogEnabledNotification()) {
 			$oLog = new EventCallback();
 			if ($this->IsBeingTested()) {
-				$oLog->Set('message', 'TEST - Callback');
+				$oLog->Set('message', 'TEST - Scheduled');
 			}
 			else {
-				$oLog->Set('message', 'Callback');
+				$oLog->Set('message', 'Scheduled');
 			}
 			$oLog->Set('userinfo', UserRights::GetUser());
 			$oLog->Set('trigger_id', $oTrigger->GetKey());
@@ -100,14 +100,17 @@ abstract class _ActionCallback extends ActionNotification {
 				$oTriggeringObject = $aContextArgs['this->object()'];
 
 				// Check if callback is on the object itself
-				if(stripos($sCallbackFQCN, '$this->') !== false)
-				{
+				if(stripos($sCallbackFQCN, '$this->') !== false) {
+					
 					$sMethodName = str_ireplace('$this->', '', $sCallbackFQCN);
-					$payload = $oTriggeringObject->$sMethodName($aContextArgs, $oLog, $this);
+					$sReturn = $oTriggeringObject->$sMethodName($aContextArgs, $oLog, $this);
+					
 				}
 				// Otherwise, check if callback is callable as a static method
 				elseif(is_callable($sCallbackFQCN)) {
-					$payload = call_user_func($sCallbackFQCN, $oTriggeringObject, $aContextArgs, $oLog, $this);
+					
+					$sReturn = call_user_func($sCallbackFQCN, $oTriggeringObject, $aContextArgs, $oLog, $this);
+					
 				}
 				// Otherwise, there is a problem
 				else {
@@ -117,7 +120,7 @@ abstract class _ActionCallback extends ActionNotification {
 			}
 
 			
-			return 'Executed';
+			return ($sReturn != '' ? $sReturn : 'Executed');
 			
 		}
 		catch(Exception $oException) {
