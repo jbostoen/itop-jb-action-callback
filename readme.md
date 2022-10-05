@@ -70,7 +70,7 @@ Or add it in the datamodel as a method of an object class:
 				 *
 				 * @return void.
 				 */
-				public static function SetLastReminder($aContextArgs, $oLog, $oAction) {
+				public function SetLastReminder($aContextArgs, $oLog, $oAction) {
 				
 					$this->Set('last_reminder', date('Y-m-d H:i:s'));
 					$this->DBUpdate();
