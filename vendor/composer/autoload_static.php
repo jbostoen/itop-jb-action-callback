@@ -22,7 +22,6 @@ class ComposerStaticInit20fb393f1c197af0a50c3a7540422dc1
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'JeffreyBostoenExtensions\\ActionCallback\\Core\\Notification\\Action\\_ActionCallback' => __DIR__ . '/../..' . '/src/Core/Notification/Action/_ActionCallback.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -4,8 +4,5 @@
     "psr-4": {
       "JeffreyBostoenExtensions\\ActionCallback\\": "src/"
     }
-  },
-  "require": {
-    "composer-runtime-api": "^2.0"
   }
 }

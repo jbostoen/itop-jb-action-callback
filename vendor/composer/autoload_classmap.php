@@ -7,5 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'JeffreyBostoenExtensions\\ActionCallback\\Core\\Notification\\Action\\_ActionCallback' => $baseDir . '/src/Core/Notification/Action/_ActionCallback.php',
 );
