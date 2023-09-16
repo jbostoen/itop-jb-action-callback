@@ -1,4 +1,4 @@
-# jb-authenticationmethod
+# jb-action-callback
 
 Copyright (c) 2019-2022 Jeffrey Bostoen
 
