@@ -5,7 +5,7 @@
 //
 //
 SetupWebPage::AddModule(__FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-	'jb-action-callback/2.7.220829', array(
+	'jb-action-callback/2.7.240107', array(
 		// Identification
 		//
 		'label' => 'Feature: Callback action',

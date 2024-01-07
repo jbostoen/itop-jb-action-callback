@@ -10,7 +10,7 @@
 				<category>grant_by_profile,core/cmdb,application</category>
 				<abstract>false</abstract>
 				<key_type>autoincrement</key_type>
-				<db_table>priv_action_webhook</db_table>
+				<db_table>priv_action_callback</db_table>
 				<db_key_field>id</db_key_field>
 				<naming>
 					<attributes>
@@ -77,7 +77,7 @@
 				<category>core/cmdb,view_in_gui</category>
 				<abstract>false</abstract>
 				<key_type>autoincrement</key_type>
-				<db_table>priv_event_webhook</db_table>
+				<db_table>priv_event_callback</db_table>
 				<db_key_field>id</db_key_field>
 				<display_template/>
 				<icon/>

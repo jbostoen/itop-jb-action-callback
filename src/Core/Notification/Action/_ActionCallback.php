@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright   Copyright (c) 2022 Jeffrey Bostoen
+ * @copyright   Copyright (c) 2022-2024 Jeffrey Bostoen
  * @license     See license.md
- * @version     2.7.220511
+ * @version     2.7.240107
  *
  */
  
