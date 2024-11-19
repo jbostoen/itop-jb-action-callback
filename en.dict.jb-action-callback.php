@@ -14,8 +14,8 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:EventCallback+' => 'Callback event',
 	
 	// ActionCallback
-	'Class:ActionCallback' => 'Callback event',
-	'Class:ActionCallback+' => 'Callback event',
+	'Class:ActionCallback' => 'Callback action',
+	'Class:ActionCallback+' => 'Callback action',
 	'Class:ActionCallback/Attribute:callback' => 'Callback',
 	'Class:ActionCallback/Attribute:callback+' => 'You can use 2 types of methods:
 - From the triggering object itself (eg. UserRequest), must be public. Example: $this->XXX($aContextArgs, $oLog, $oAction)

@@ -2,27 +2,27 @@
 /**
  * @copyright   Copyright (c) 2022-2024 Jeffrey Bostoen
  * @license     See license.md
- * @version     2.7.240107
+ * @version     2.7.240107	
  *
  */
  
 namespace JeffreyBostoenExtensions\ActionCallback\Core\Notification\Action;
 
-use \ActionNotification;
-use \ApplicationContext;
-use \EventCallback;
-use \Exception;
-use \IssueLog;
-use \MetaModel;
-use \UserRights;
+use ActionNotification;
+use ApplicationContext;
+use EventCallback;
+use Exception;
+use MetaModel;
+use UserRights;
+use JeffreyBostoenExtensions\ActionCallback\ActionCallbackHelper;
 
 abstract class _ActionCallback extends ActionNotification {
 	
 	/**
 	 * @inheritDoc
 	 *
-	 * @throws \ArchivedObjectException
-	 * @throws \CoreException
+	 * @throws ArchivedObjectException
+	 * @throws CoreException
 	 */
 	public function DoExecute($oTrigger, $aContextArgs) {
 		
@@ -71,12 +71,12 @@ abstract class _ActionCallback extends ActionNotification {
 	/**
 	 * Do the execution itself
 	 *
-	 * @param \Trigger           $oTrigger TriggerObject which called the action
+	 * @param Trigger           $oTrigger TriggerObject which called the action
 	 * @param array              $aContextArgs
-	 * @param \EventNotification $oLog     Reference to the Log Object for store information in EventNotification
+	 * @param EventNotification $oLog     Reference to the Log Object for store information in EventNotification
 	 *
 	 * @return string
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	protected function _DoExecute($oTrigger, $aContextArgs, &$oLog) {
 		
@@ -91,6 +91,7 @@ abstract class _ActionCallback extends ActionNotification {
 			
 			if(empty($sCallbackFQCN)) {
 				
+				ActionCallbackHelper::Trace('Callback not specified.');
 				throw new Exception('Callback not specified.');
 				
 			}
@@ -103,18 +104,22 @@ abstract class _ActionCallback extends ActionNotification {
 				if(stripos($sCallbackFQCN, '$this->') !== false) {
 					
 					$sMethodName = str_ireplace('$this->', '', $sCallbackFQCN);
+					ActionCallbackHelper::Trace(sprintf('Call method %1$s on object %$2s', $sMethodName, $oTriggeringObject->Get('friendlyname')));
 					$sReturn = $oTriggeringObject->$sMethodName($aContextArgs, $oLog, $this);
 					
 				}
 				// Otherwise, check if callback is callable as a static method
 				elseif(is_callable($sCallbackFQCN)) {
 					
+					ActionCallbackHelper::Trace(sprintf('Call method %1$s for object %2$s', $sCallbackFQCN, $oTriggeringObject->Get('friendlyname')));
 					$sReturn = call_user_func($sCallbackFQCN, $oTriggeringObject, $aContextArgs, $oLog, $this);
 					
 				}
 				// Otherwise, there is a problem
 				else {
-					throw new Exception('Specified callback is not callable ('.$sCallbackFQCN.')');
+					$sError = sprintf('Specified callback is not callable: %1$s for object %2$s', $sCallbackFQCN, $oTriggeringObject->Get('friendlyname'));
+					ActionCallbackHelper::Trace($sError);
+					throw new Exception($sError);
 				}
 				
 			}
@@ -136,12 +141,13 @@ abstract class _ActionCallback extends ActionNotification {
 
 
 	/**
-	 * Just a demo method. It saves a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
+	 * Just a demo method. 
+	 * This will creae a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
 	 *
-	 * @param \DBObject $oObject iTop object.
-	 * @param \Array $aContextArgs Hash table containing context arguments.
-	 * @param \EventCallback $oLog Notification object (log).
-	 * @param \ActionCallback $oAction The action which is being executed.
+	 * @param DBObject $oObject iTop object.
+	 * @param Array $aContextArgs Hash table containing context arguments.
+	 * @param EventCallback $oLog Notification object (log).
+	 * @param ActionCallback $oAction The action which is being executed.
 	 *
 	 * @return void.
 	 */

@@ -29,7 +29,8 @@ Methods can look like this:
 abstract class SomeHelper {
 
 	/**
-	 * Just a demo method. It saves a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
+	 * Just a demo method. 
+	 * This will creae a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
 	 *
 	 * @param \DBObject $oObject iTop object.
 	 * @param \Array $aContextArgs Hash table containing context arguments.
