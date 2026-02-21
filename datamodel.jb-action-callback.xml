@@ -48,6 +48,9 @@
 						<item id="callback">
 							<rank>50</rank>
 						</item>
+						<item id="trigger_list">
+							<rank>101</rank>
+						</item>
 					</items>
 				</details>
 				<list>
