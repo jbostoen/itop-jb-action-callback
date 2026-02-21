@@ -10,11 +10,12 @@ namespace JeffreyBostoenExtensions\ActionCallback\Core\Notification\Action;
 
 use ActionNotification;
 use ApplicationContext;
+use DBObject;
 use EventCallback;
 use Exception;
 use MetaModel;
 use UserRights;
-use JeffreyBostoenExtensions\ActionCallback\ActionCallbackHelper;
+use JeffreyBostoenExtensions\ActionCallback\Helper;
 
 abstract class _ActionCallback extends ActionNotification {
 	
@@ -84,41 +85,38 @@ abstract class _ActionCallback extends ActionNotification {
 		
 		try {
 			
-			/** @var \DBObject $oTriggeringObject */
+			/** @var DBObject $oTriggeringObject */
 			$oTriggeringObject = $aContextArgs['this->object()'];
 			
 			$sCallbackFQCN = $this->Get('callback');
 			
 			if(empty($sCallbackFQCN)) {
 				
-				ActionCallbackHelper::Trace('Callback not specified.');
+				Helper::Trace('Callback not specified.');
 				throw new Exception('Callback not specified.');
 				
 			}
 			else {
-				
-				/** @var \DBObject $oTriggeringObject */
-				$oTriggeringObject = $aContextArgs['this->object()'];
 
 				// Check if callback is on the object itself
 				if(stripos($sCallbackFQCN, '$this->') !== false) {
 					
 					$sMethodName = str_ireplace('$this->', '', $sCallbackFQCN);
-					ActionCallbackHelper::Trace(sprintf('Call method %1$s on object %$2s', $sMethodName, $oTriggeringObject->Get('friendlyname')));
+					Helper::Trace('Call method %1$s on object %$2s', $sMethodName, $oTriggeringObject->Get('friendlyname'));
 					$sReturn = $oTriggeringObject->$sMethodName($aContextArgs, $oLog, $this);
 					
 				}
 				// Otherwise, check if callback is callable as a static method
 				elseif(is_callable($sCallbackFQCN)) {
 					
-					ActionCallbackHelper::Trace(sprintf('Call method %1$s for object %2$s', $sCallbackFQCN, $oTriggeringObject->Get('friendlyname')));
+					Helper::Trace('Call method %1$s for object %2$s', $sCallbackFQCN, $oTriggeringObject->Get('friendlyname'));
 					$sReturn = call_user_func($sCallbackFQCN, $oTriggeringObject, $aContextArgs, $oLog, $this);
 					
 				}
 				// Otherwise, there is a problem
 				else {
 					$sError = sprintf('Specified callback is not callable: %1$s for object %2$s', $sCallbackFQCN, $oTriggeringObject->Get('friendlyname'));
-					ActionCallbackHelper::Trace($sError);
+					Helper::Trace($sError);
 					throw new Exception($sError);
 				}
 				
@@ -136,24 +134,6 @@ abstract class _ActionCallback extends ActionNotification {
 		ApplicationContext::SetUrlMakerClass($sPreviousUrlMaker);
 
 		return 'Bug: Unknown behavior, check the event notification log.';
-		
-	}
-
-
-	/**
-	 * Just a demo method. 
-	 * This will creae a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
-	 *
-	 * @param DBObject $oObject iTop object.
-	 * @param Array $aContextArgs Hash table containing context arguments.
-	 * @param EventCallback $oLog Notification object (log).
-	 * @param ActionCallback $oAction The action which is being executed.
-	 *
-	 * @return void.
-	 */
-	public static function DemoMethod($oObject, $aContextArgs, $oLog, $oAction) {
-	
-		file_put_contents(APPROOT.'/log/action_callback_demo.txt', 'Trigger: '.$oAction->GetRawName().' - Object: '.$oObject->GetRawName());
 		
 	}
 

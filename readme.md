@@ -32,16 +32,16 @@ abstract class SomeHelper {
 	 * Just a demo method. 
 	 * This will creae a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
 	 *
-	 * @param \DBObject $oObject iTop object.
-	 * @param \Array $aContextArgs Hash table containing context arguments.
-	 * @param \EventCallback $oLog Notification object (log).
-	 * @param \ActionCallback $oAction The action which is being executed.
+	 * @param DBObject $oObject iTop object.
+	 * @param Array $aContextArgs Hash table containing context arguments.
+	 * @param EventCallback $oLog Notification object (log).
+	 * @param ActionCallback $oAction The action which is being executed.
 	 *
 	 * @return void.
 	 */
 	public static function DemoMethod($oObject, $aContextArgs, $oLog, $oAction) {
 	
-		file_put_contents(APPROOT.'/log/action_callback_demo.txt', 'Trigger: '.$oAction->GetRawName().' - Object: '.$oObject->GetRawName());
+		file_put_contents(APPROOT.'/log/action_callback_demo.txt', 'Action: '.$oAction->GetRawName().' - Object: '.$oObject->GetRawName());
 		
 	}
 
@@ -64,10 +64,10 @@ Or add it in the datamodel as a method of an object class:
 				/**
 				 * Just a demo method. It saves a action_callback_demo.txt file under iTop's directory/log containing the trigger name and object name.
 				 *
-				 * @param \DBObject $oObject iTop object.
-				 * @param \Array $aContextArgs Hash table containing context arguments.
-				 * @param \EventCallback $oLog Notification object (log).
-				 * @param \ActionCallback $oAction The action which is being executed.
+				 * @param DBObject $oObject iTop object.
+				 * @param \array $aContextArgs Hash table containing context arguments.
+				 * @param EventCallback $oLog Notification object (log).
+				 * @param ActionCallback $oAction The action which is being executed.
 				 *
 				 * @return void.
 				 */
